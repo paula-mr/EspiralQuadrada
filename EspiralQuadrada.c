@@ -1,27 +1,20 @@
 #include<stdio.h>
 
 int main() {
-    int n, i = 0, tamanhoLado = 1, coordenadaX = 0, coordenadaY = 0;
+    int n, i = 0, tamanhoLado = 1, coordenadaX = 0, coordenadaY = 0, operacao;
     scanf("%d", &n);
 
     while ( i < n ) {
+
+        operacao = tamanhoLado % 2 == 0 ? -1 : 1;
+
         for (int j = 0; i < n && j < tamanhoLado; j++) {
-            if (tamanhoLado % 2 == 0) {
-                coordenadaY -= 1;
-            }
-            else {
-                coordenadaY += 1;
-            }
+            coordenadaY += operacao;
             i++;
         }
 
         for (int j = 0; i < n && j < tamanhoLado; j++) {
-            if (tamanhoLado % 2 == 0) {
-                coordenadaX += 1;
-            }
-            else {
-                coordenadaX -= 1;
-            }
+            coordenadaX -= operacao;
             i++;
         }
 
