@@ -1,12 +1,10 @@
 #include<stdio.h>
 
 int main() {
-    int n, j=0, tamanhoLado = 1, coordenadaX = 0, coordenadaY = 0, operacao, orientacao = -1;
+    int n, j=0, tamanhoLado = 1, coordenadaX = 0, coordenadaY = 0, operacao = 1, orientacao = -1;
     scanf("%d", &n);
 
     for (int i =0; i < n; i++) {
-
-        operacao = tamanhoLado % 2 == 0 ? -1 : 1; // caso o tamanho do lado seja par, adiciona-se na coordenada X e subtrai-se na coordenada Y e vice-versa
 
         if (orientacao < 0) { // orientacao negativa opera-se sobre a coordenada Y e positiva sobre a coordenada X
             coordenadaY += operacao;
@@ -22,6 +20,7 @@ int main() {
             orientacao *= -1;
             if (orientacao < 0) { //quando a orientacao passa a ser do Y, o tamanho do lado aumenta
                 tamanhoLado++;
+                operacao = tamanhoLado % 2 == 0 ? -1 : 1; // caso o tamanho do lado seja par, adiciona-se na coordenada X e subtrai-se na coordenada Y e vice-versa
             }
         }
     }

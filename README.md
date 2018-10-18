@@ -1,2 +1,0 @@
-# EspiralQuadrada
-TP Matemática Discreta
