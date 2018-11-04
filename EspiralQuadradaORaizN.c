@@ -1,7 +1,6 @@
-#include<stdio.h>
-
 int main() {
     int n, tamanhoLado = 1, coordenadaX = 0, coordenadaY = 0, resto, operacao;
+
     scanf("%d", &n);
 
     resto = n;

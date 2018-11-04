@@ -1,5 +1,3 @@
-#include<stdio.h>
-
 int main() {
     int n, j=0, tamanhoLado = 1, coordenadaX = 0, coordenadaY = 0, operacao = 1, orientacao = -1;
     scanf("%d", &n);
