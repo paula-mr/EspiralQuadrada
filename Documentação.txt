@@ -1,0 +1,50 @@
+Solução O(n):
+A solução O(n) foi a primeira a ser desenvolvida por ser de mais fácil análise. Para implementá-la, foi preciso perceber que:
+	- Para construir a espiral quadrada, é preciso atentar-se a duas informações, a orientação (se ela está se movimentando pelo eixo X ou pelo eixo Y) e a operação (se ela está crescendo ou decrescendo no eixo);
+	- A orientação muda toda vez que o lado supera o último lado do eixo;
+	- A operação é definida da seguinte forma: caso o tamanho do lado seja par, ela decresce no eixo Y e cresce no eixo X;
+	- O tamanho do lado cresce toda em todo eixo Y.
+Assim, a implementação baseou-se em quatro variáveis de controle: a orientacao, a operacao e o tamanhoLado. Elas foram definidas da seguinte forma:
+	- orientacao: -1 para o eixo Y e 1 para o eixo X
+	- operacao: -1 para lados com tamanho par e 1 para lados com tamanho ímpar
+	- tamanhoLado: começa em 1 e é incrementado toda vez que a opirentação passa para o eixo Y
+	- j: variável incremental da posição no lado, começando no 0
+Logo, o algoritmo funciona da seguinte forma:
+	- As coordenadas X e Y do ponto começam na origem (0,0), a orientação é negativa (deve-se começar operando sobre o eixo X) e o tamanho do lado é 1 (ímpar e, portanto, a operação é positiva, ou seja, a coordenada Y cresce)
+	- Após realizar a operação sobre as coordenas, o j é incrementado
+	- Como o j alcança o tamanhoLado, ele é zerado e a orientação é trocada (passa-se a operar sobre X). Como a orientação é do eixo X, não é preciso incrementar o tamanhoLado
+	- A orientação passa a ser positiva, portanto opera-se sobre o eixo X. A operação continua positiva, portanto a coordenada X deve decrescer.
+	- J é incrementado
+	- J alcança o tamanho do lado e é zerado e a orientação deve ser trocada para o eixo Y
+	- Como voltamos ao eixo Y, devemos incrementar o tamanho do Lado e trocar a operação, que como o eixo é par deve ser negativo (decresce no eixo Y e cresce no eixo X)
+	- O ciclo continua até alcançar n
+Destarte, como para cada posição n+1 é executado mais 1 ciclo, o custo do algoritmo é O(n).
+
+Solução O menor que N:
+A solução O menor que N foi desenvolvida logo após a O(n), ao perceber que é possível definir um ciclo a partir do tamanhoLado, assim a operação continua sendo definido a partir da paridade do tamanhoLado, porém, em vez de fazer uma operação por vez, o algoritmo foi definido da seguinte forma:
+	- Foi definida a variável resto, que começa com o valor de N. Enquanto o resto for maior que 0, o loop continua.
+	- A operação é definida a partir da paridade do tamanhoLado.
+	- Caso o tamanhoLado seja menor que o resto, a coordenadaY pode ser operada k vezes, sendo k o tamanhoLado. Isso pode ser feito com uma multiplicação. O resto é então decrescido to tamanho lado.
+	- Caso contrário, a coordenadaY é operada k vezes, sendo k o resto. Então o resto é igualado a 0.
+	- A mesma operação é feita para a coordenadaX, pois primeiro se opera sobre o eixo Y e depois sobre o eixo X.
+	- Incrementa-se o tamanhoLado e começa-se um novo ciclo.
+Após implementá-lo, ao analisar seu custo de processamento, foi possível perceber que se custo seria O(round(n^(1/2))), pois analisando a partir dos vértices, com 1 <= n <= 2, o custo é 1, com 3 <= n <= 6, o custo é 2, com 7 <= n <= 13, o custo é 3, sendo casa um dos números destacados um vértice.
+Isso significa que os lados anteriores e posteriores do quadrado perfeito terão o custo deste. Isso pode ser observado no código pois ele "anda" dois lados por vez. Porém, não se pode afirmar que o custo desse código é O(n^(1/2)).
+
+Solução O(n^(1/2)):
+É uma adaptação do código O menor que N. Se o resto for menor que o tamanho do próximo lado, isso significa que o N procurado está antes do próximo vértice, assim, basta operar sobre a coordenada Y para chegar no número desejado.
+
+Solução O(1):
+A solução O(1) foi a última a ser feita por precisar de mais análise. A partir da análise dos resultados obtidos utilizando os outros algoritmos, foi possível perceber um padrão:
+	- Um quadrado perfeito ímpar N pode ser escrito da forma (x-1, x), em que (2x-1)^2 = N.
+	- Um quadrado perfeito par N pode ser escrito de forma (-x, -x), em que (x)^2 = N.
+	- Entre um quadrado perfeito ímpar e um par, opera-se negativamente sobre as coordenadas.
+	- Entre um quadrado perfeito par e um ímpar, opera-se positivamente sobre as coordenadas.
+Assim, o código foi escrito da seguinte maneira:
+	- Se N é um quadrado perfeito, aplica-se as fórmulas e encontra-se as coordenadas (else do if, pois é mais simples e facilita a leitura um else menor).
+	- Senão (lógica principal do if), encontra-se o quadrado perfeito anterior e suas coordenadas.
+	- Encontra-se a diferença entre N e o quadrado perfeito anterior.
+	- Define-se a operação que deve ser realizada (se o quadrado perfeito anterior é par, soma-se nas coordenadas, senão, subtrai-se).
+	- Assim, se a diferença entre N e o quadrado perfeito anterior é maior que a raiz do quadrado perfeito anterior (que é o tamanho do lado atual), a coordenada x será a coordenada x anterior mais a operação vezes o tamanho do lado (raiz do quadrado perfeito anterior). A diferença é subtraida do tamanho do lado, pois deverá ser usada para operar sobre Y.
+	- Senão, a coordenada x será a coordenada x do quadrado perfeito anterior mais a operação vezes a diferença (isso significa que não se deve operar sobre Y, portanto iguala-se a diferença a 0).
+	- Assim, opera-se sobre a coordenada Y da mesma forma com o resto da diferença.
