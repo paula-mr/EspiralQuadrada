@@ -1,0 +1,14 @@
+Trabalho desenvolvido pela aluna Paula Mara Ribeiro, matrícula 2018047048, turma TZ1
+
+Para rodar os algoritmos, basta compilar e rodar utilizando os seguintes comandos:
+
+gcc EspiralQuadrada.c -o EspiralQuadrada -lm -Wall
+gcc EspiralQuadradaO1.c -o EspiralQuadradaO1 -lm -Wall
+gcc EspiralQuadradaORaizN.c -o EspiralQuadradaORaizN -lm -Wall
+gcc EspiralQuadradaMenorN.c -o EspiralQuadradaMenorN -lm -Wall
+
+Respectivamente para as soluções O(N), O(1), O(N^(1/2)) e O(<N).
+
+O programa espera uma entrada inteira N >= 0 e retornará as coordenadas desse ponto na espiral quadrada.
+
+A descrição da implementação dos algoritmos encontra-se no arquivo Documentação.txt
